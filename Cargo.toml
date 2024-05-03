@@ -7,7 +7,8 @@ members = [
   "huff_cli",
   "huff_parser",
   "huff_js",
-  "huff_tests"
+  "huff_tests",
+  "huff_zk"
 ]
 exclude = [ "assets", "huffup", "huff-examples" ]
 
