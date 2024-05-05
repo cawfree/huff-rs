@@ -586,6 +586,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "derive_builder"
+version = "0.1.0"
+source = "git+https://github.com/DelphinusLab/zkWasm-rust.git#ce5b89d1c3ac9c3fd76ef481bd9bc5dcdccc9cb0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
 name = "derive_more"
 version = "0.99.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -845,10 +855,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "be4136b2a15dd319360be1c07d9933517ccf0be8f16bf62a3bee4f0d618df427"
 dependencies = [
  "cfg-if 1.0.0",
- "js-sys",
  "libc",
  "wasi",
- "wasm-bindgen",
 ]
 
 [[package]]
@@ -1036,7 +1044,6 @@ dependencies = [
  "codemap-diagnostic",
  "ethers-core",
  "itertools",
- "js-sys",
  "lazy_static",
  "pathdiff",
  "phf 0.10.1",
@@ -1072,9 +1079,9 @@ dependencies = [
  "huff_utils",
  "rlp",
  "serde",
- "serde-wasm-bindgen",
- "serde_json",
+ "serde-json-wasm",
  "wasm-bindgen",
+ "zkwasm-rust-sdk",
 ]
 
 [[package]]
@@ -2136,6 +2143,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde-json-wasm"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f05da0d153dd4595bdffd5099dc0e9ce425b205ee648eb93437ff7302af8c9a5"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "serde-wasm-bindgen"
 version = "0.4.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2859,4 +2875,14 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.37",
+]
+
+[[package]]
+name = "zkwasm-rust-sdk"
+version = "0.1.0"
+source = "git+https://github.com/DelphinusLab/zkWasm-rust.git#ce5b89d1c3ac9c3fd76ef481bd9bc5dcdccc9cb0"
+dependencies = [
+ "derive_builder",
+ "primitive-types",
+ "wasm-bindgen",
 ]

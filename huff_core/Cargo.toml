@@ -32,8 +32,10 @@ rand = "0.8.5"
 [target.'cfg(not(all(target_arch = "wasm32", target_os = "unknown")))'.dependencies]
 rayon = { version = "1.5.3" }
 
-[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
-getrandom = { version = "0.2", features = ["js"] }
+# TODO: make dynamic
+#[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
+#getrandom = { version = "0.2", features = ["js"] }
+getrandom = { version = "0.2", features = ["custom"] }
 
 [[bench]]
 name = "huff_benchmark"
