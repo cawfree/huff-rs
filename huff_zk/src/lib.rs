@@ -37,6 +37,26 @@ struct CompilerOutput {
     contracts: Option<HashMap<String, CompilerArtifact>>,
 }
 
+use getrandom::register_custom_getrandom;
+
+use core::num::NonZeroU32;
+use getrandom::Error;
+
+// Some application-specific error code
+const MY_CUSTOM_ERROR_CODE: u32 = Error::CUSTOM_START + 42;
+pub fn always_fail(buf: &mut [u8]) -> Result<(), Error> {
+    let code = NonZeroU32::new(MY_CUSTOM_ERROR_CODE).unwrap();
+    Err(Error::from(code))
+}
+
+register_custom_getrandom!(always_fail);
+
+/// Converts a CompilerError into a returnable JsValue
+//fn compiler_error_to_js_value(ce: Arc<CompilerError>) -> JsValue {
+//    let output = CompilerOutput { errors: Some(vec![format!("{}", *ce)]), contracts: None };
+//    serde_wasm_bindgen::to_value(&output).unwrap_or(JsValue::NULL)
+//}
+
 #[wasm_bindgen]
 pub fn zkmain() {
 
@@ -53,23 +73,21 @@ pub fn zkmain() {
     let evm_version = EVMVersion::from(input.evm_version);
 
     // TODO: need getrandom
-    //let compiler = Compiler::new_in_memory(
-    //    &evm_version,
-    //    Arc::new(input.sources),
-    //    input.files,
-    //    input.alternative_main,
-    //    input.alternative_constructor,
-    //    input.construct_args,
-    //    None,
-    //    false,
-    //);
+    let compiler = Compiler::new_in_memory(
+        &evm_version,
+        Arc::new(input.sources),
+        input.files,
+        input.alternative_main,
+        input.alternative_constructor,
+        input.construct_args,
+        None,
+        false,
+    );
 
-//     let input: CompilerInput = serde_wasm_bindgen::from_value(s.into()).unwrap();
+    compiler.execute();
 
-    //let commands_len = unsafe {wasm_input(0)};
-    //let data = vec![0x83, b'c', b'a', b't'];
-    //let _animal: String = rlp::decode(&data).unwrap();
+    //let res: Vec<Arc<Artifact>> = compiler.execute().map_err(compiler_error_to_js_value).unwrap();
 
-    // assert_eq!(animal, "cat".to_owned());
-    //0
+    //let mut contracts: HashMap<String, CompilerArtifact> = HashMap::new();
+
 }

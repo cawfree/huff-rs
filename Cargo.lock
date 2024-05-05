@@ -982,7 +982,6 @@ dependencies = [
  "cfg-if 1.0.0",
  "criterion",
  "ethers-core",
- "getrandom",
  "huff_codegen",
  "huff_lexer",
  "huff_parser",
@@ -1075,6 +1074,7 @@ dependencies = [
 name = "huffc-zk"
 version = "0.1.0"
 dependencies = [
+ "getrandom",
  "huff_core",
  "huff_utils",
  "rlp",
